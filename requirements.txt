@@ -1,4 +1,5 @@
 Flask
+Cython
 gunicorn==19.6.0
 requests
 wikipedia
