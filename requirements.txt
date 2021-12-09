@@ -8,3 +8,4 @@ pandas
 googletrans
 geopy
 xlrd
+openpyxl
