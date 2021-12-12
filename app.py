@@ -111,60 +111,55 @@ def flexmessage(query):
         productName,imgUrl,desc,cont = res
     flex = '''
     {
-        "type": "bubble",
-        "hero": {
-          "type": "image",
-          "url": "%s",
-          "margin": "none",
-          "size": "full",
-          "aspectRatio": "1:1",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com"
-          }
-        },
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "spacing": "md",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com"
-          },
-          "contents": [
-            {
-              "type": "text",
-              "text": "%s",
-              "size": "xl",
-              "weight": "bold"
-            },
-            {
-              "type": "text",
-              "text": "%s",
-              "wrap": true
-            }
-          ]
-        },
-        "footer": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "button",
-              "action": {
-                "type": "postback",
-                "label": "ติดต่อคนขาย",
-                "data": "%s"
-              },
-              "color": "#F67878",
-              "style": "primary"
-            }
-          ]
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "https://www.img.in.th/images/bb0a50b122c13c4f17678eab4e6ba81f.png",
+    "size": "full",
+    "aspectRatio": "20:17",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "https://liff.line.me/1656633739-NjWEVAWZ"
+    },
+    "animated": true
+  },
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "text": "Flex Animetion By Ben",
+        "size": "xl",
+        "weight": "bold",
+        "color": "#cc4466",
+        "align": "center"
+      }
+    ],
+    "backgroundColor": "#000000"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "แชร์ คลิ๊ก",
+          "uri": "https://liff.line.me/1656633739-NjWEVAWZ"
         }
-      }'''%(imgUrl,productName,desc,cont)
+      }
+    ],
+    "flex": 0,
+    "backgroundColor": "#000000"
+  }
+}
+    '''%(imgUrl,productName,desc,cont)
     return flex
 
 from linebot.models import (TextSendMessage,FlexSendMessage)
