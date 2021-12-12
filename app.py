@@ -99,9 +99,9 @@ def getdata(query):
     else:
         productName = res['ProductName'].values[0]
         imgUrl = res['ImgUrl'].values[0]
-        desc = res['Description'].values[0]
-        cont = res['Contact'].values[0]
-        return productName,imgUrl,desc,cont
+        #desc = res['Description'].values[0]
+        #cont = res['Contact'].values[0]
+        return productName,imgUrl #,desc,cont
 
 def flexmessage(query):
     res = getdata(query)
