@@ -159,7 +159,7 @@ def flexmessage(query):
     "backgroundColor": "#000000"
   }
 }
-    '''%(imgUrl,productName,desc,cont)
+    '''%(imgUrl,productName)#,desc,cont)
     return flex
 
 from linebot.models import (TextSendMessage,FlexSendMessage)
