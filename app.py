@@ -108,7 +108,7 @@ def flexmessage(query):
     if res == 'nodata':
         return 'nodata'
     else:
-        productName,imgUrl,desc,cont = res
+        productName,imgUrl = res #,desc,cont = res
     flex = '''
     {
   "type": "bubble",
