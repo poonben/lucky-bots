@@ -114,7 +114,7 @@ def flexmessage(query):
   "type": "bubble",
   "hero": {
     "type": "image",
-    "url": "https://www.img.in.th/images/bb0a50b122c13c4f17678eab4e6ba81f.png",
+    "url": "%s",
     "size": "full",
     "aspectRatio": "20:17",
     "aspectMode": "cover",
@@ -130,7 +130,7 @@ def flexmessage(query):
     "contents": [
       {
         "type": "text",
-        "text": "Flex Animetion By Ben",
+        "text": "%s",
         "size": "xl",
         "weight": "bold",
         "color": "#cc4466",
