@@ -96,7 +96,6 @@ def event_handle(event):
        else:         
           line_bot_api.reply_message(rtoken, replyObj)
 
-sep
     if msgType == "postback":
         msg = str(event["postback"]["data"])
         replyObj = handle_postback(msg)
