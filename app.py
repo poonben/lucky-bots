@@ -6,6 +6,7 @@ from flask import Flask, jsonify, render_template, request
 import json
 import numpy as np
 import pandas as pd
+import xlsxwriter
 import requests
 import geopy.distance as ps
 from linebot.models import (
@@ -67,10 +68,34 @@ def event_handle(event):
     if 'postback' in event.keys():
         msgType = 'postback'
 
+    #if msgType == "text":
+    #    msg = str(event["message"]["text"])
+    #    replyObj = handle_text(msg)
+    #    line_bot_api.reply_message(rtoken, replyObj)
+    
+
+    # สร้าง DataFrame ที่มี 1 คอลัมน์ชื่อ 'Data'
     if msgType == "text":
-        msg = str(event["message"]["text"])
-        replyObj = handle_text(msg)
-        line_bot_api.reply_message(rtoken, replyObj)
+       msg = str(event["message"]["text"]) 
+       if "xc " in msg:
+          sep = msg.split(" ")
+          pesan = msg.replace(sep[0] + " ","")
+          dataframe = pd.DataFrame({'Data' :[pesan]})
+ 
+          # สร้าง Pandas Excel Writer เพื่อใช้เขียนไฟล์ Excel โดยใช้ Engine เป็น xlsxwriter
+          # โดยตั้งชื่อไฟล์ว่า 'simple_data.xlsx'
+          writer = pd.ExcelWriter('simple_data.xlsx', engine='xlsxwriter')
+          replyObj = "เรียบร้อยครับ"
+          # นำข้อมูลที่สร้างไว้ในตัวแปร dataframe เขียนลงไฟล์
+          dataframe.to_excel(writer, sheet_name='หน้าที่1')
+ 
+          # จบการทำงาน Pandas Excel writer และเซฟข้อมูลออกมาเป็นไฟล์ Excel
+          writer.save()  
+          line_bot_api.reply_message(rtoken, )                              
+       else:
+          replyObj = handle_text(msg)
+    #     line_bot_api.reply_message(rtoken, replyObj)
+
 
     if msgType == "postback":
         msg = str(event["postback"]["data"])
