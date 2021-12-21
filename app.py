@@ -56,6 +56,7 @@ def event_handle(event):
         print('error cannot get rtoken')
         return ''
     if 'message' in event.keys():
+       line_bot_api.reply_message(rtoken, message) 
         try:
             msgType = event["message"]["type"]
             msgId = event["message"]["id"]
@@ -79,7 +80,7 @@ def event_handle(event):
        msg = str(event["message"]["text"])
        replyObj = handle_text(msg)
        ben = "ok"
-       line_bot_api.reply_message(rtoken, message) 
+       
        if 'x ' in msg:
           sep = msg.replace('x ','')
          # pesan = msg.replace(sep[0] + " ","")
