@@ -91,7 +91,7 @@ def event_handle(event):
  
           # จบการทำงาน Pandas Excel writer และเซฟข้อมูลออกมาเป็นไฟล์ Excel
           writer.save()  
-          line_bot_api.reply_message(rtoken, )                              
+          line_bot_api.reply_message(rtoken, replyObj)                              
        else:
           replyObj = handle_text(msg)
     #     line_bot_api.reply_message(rtoken, replyObj)
