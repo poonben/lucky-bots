@@ -1,4 +1,4 @@
-#!/usr/bin/python
+q`#!/usr/bin/python
 #-*-coding: utf-8 -*-
 ##from __future__ import absolute_import
 ###
@@ -77,7 +77,7 @@ def event_handle(event):
 
     # สร้าง DataFrame ที่มี 1 คอลัมน์ชื่อ 'Data'
     if msgType == "text":
-       msg = str(event["message"]["text"])
+       msg = event["message"]["text"]
        replyObj = handle_text(msg)
        ben = "ok"
        
