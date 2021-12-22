@@ -69,31 +69,25 @@ def event_handle(event):
     if 'postback' in event.keys():
         msgType = 'postback'
 
-    #if msgType == "text":
-    #    msg = str(event["message"]["text"])
-    #    replyObj = handle_text(msg)
-    #    line_bot_api.reply_message(rtoken, replyObj)
-    
-
-    # สร้าง DataFrame ที่มี 1 คอลัมน์ชื่อ 'Data'
     if msgType == "text":
-       if event.message.text == "x ":
-          msg = event.message.text
-          sep = msg.replace('x ','')
-          dataframe = pd.DataFrame({'Data' :[sep]})
+        msg = str(event["message"]["text"])
+        if event.message.text == "x ":
+           msg = event.message.text
+           sep = msg.replace('x ','')
+           dataframe = pd.DataFrame({'Data' :[sep]})
           # สร้าง Pandas Excel Writer เพื่อใช้เขียนไฟล์ Excel โดยใช้ Engine เป็น xlsxwriter
           # โดยตั้งชื่อไฟล์ว่า 'simple_data.xlsx'
-          writer = pd.ExcelWriter('simple_data.xlsx', engine='xlsxwriter')
+           writer = pd.ExcelWriter('simple_data.xlsx', engine='xlsxwriter')
           # นำข้อมูลที่สร้างไว้ในตัวแปร dataframe เขียนลงไฟล์
-          dataframe.to_excel(writer, sheet_name='หน้าที่1')
-          ben = "ok" 
-          line_bot_api.reply_message(rtoken, ben)
+           dataframe.to_excel(writer, sheet_name='หน้าที่1')
+           ben = "ok" 
+           line_bot_api.reply_message(rtoken, ben)
           # จบการทำงาน Pandas Excel writer และเซฟข้อมูลออกมาเป็นไฟล์ Excel
-          writer.save()  
+           writer.save()  
                                         
-       else:
-          replyObj = handle_text(msg)         
-          line_bot_api.reply_message(rtoken, replyObj)
+        else:
+           replyObj = handle_text(msg)         
+           line_bot_api.reply_message(rtoken, replyObj)
 
     if msgType == "postback":
         msg = str(event["postback"]["data"])
