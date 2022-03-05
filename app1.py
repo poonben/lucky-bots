@@ -108,7 +108,7 @@ def event_handle(event):
     return ''
 
 
-dat = pd.read_excel('adb.xlsx')
+dat = pd.read_excel('gig.xlsx')
 def getdata(query):
     res = dat[dat['QueryWord']==query]
     if len(res)==0:
