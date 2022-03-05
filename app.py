@@ -91,7 +91,7 @@ def event_handle(event):
     return ''
 
 
-dat = pd.read_excel('gig.xlsx')
+dat = pd.read_excel('https://onedrive.live.com/view.aspx?resid=BC03A0034D5009C9!106&ithint=file%2cxlsx&authkey=!AE82tuPyb_rKM9M')
 def getdata(query):
     res = dat[dat['QueryWord']==query]
     if len(res)==0:
