@@ -1,7 +1,7 @@
-Flask
-Cython
+Flask==2.2.2
+Cython==0.29.32
 gunicorn==19.6.0
-requests
+requests==2.28.1
 wikipedia
 line-bot-sdk
 pandas
@@ -10,3 +10,4 @@ geopy
 xlrd
 openpyxl
 xlsxwriter
+urllib3==1.26.1
