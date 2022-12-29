@@ -2,7 +2,7 @@
 #-*-coding: utf-8 -*-
 ##from __future__ import absolute_import
 ###
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template
 import json
 import numpy as np
 import pandas as pd
@@ -18,7 +18,7 @@ from linebot import (
 
 app = Flask(__name__)
 
-lineaccesstoken = 'WupG+Oqu6t+bgHe83W5Vdp1Y/8ceP0nDbVdcfQwB/VnUOlUBXzWEB+gj8nOwei5kFDTkevc7zj7pUn32pg7LcvPFOH0mynFRz/rlQWvjzIlJoFzULJJ/N67BOaduMjqk4yJiXXw+81rfsfcPKEzsIgdB04t89/1O/w1cDnyilFU='
+lineaccesstoken = 'BN50dGWrCel1vZK39kPDhBgqwvTTe/33aLRDmDxbRX5Fds5kP7aLifH5YLOUzFfuQ7SABUzH/J6G7ReeCFlgM0xQG388iOrY4e5WKZ6m2rMh+m6wVXHDqLktW8ElW0c4buliTDNNMXqhdVu8rOdjVwdB04t89/1O/w1cDnyilFU='
 line_bot_api = LineBotApi(lineaccesstoken)
 
 casedata = pd.read_excel('casedata.xlsx')
