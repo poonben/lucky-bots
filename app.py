@@ -1,4 +1,4 @@
-#!/usr/bin/python
+111#!/usr/bin/python
 #-*-coding: utf-8 -*-
 ##from __future__ import absolute_import
 ###
@@ -21,7 +21,7 @@ app = Flask(__name__)
 lineaccesstoken = 'BN50dGWrCel1vZK39kPDhBgqwvTTe/33aLRDmDxbRX5Fds5kP7aLifH5YLOUzFfuQ7SABUzH/J6G7ReeCFlgM0xQG388iOrY4e5WKZ6m2rMh+m6wVXHDqLktW8ElW0c4buliTDNNMXqhdVu8rOdjVwdB04t89/1O/w1cDnyilFU='
 line_bot_api = LineBotApi(lineaccesstoken)
 
-casedata = pd.read_excel('casedata.xlsx')
+casedata = pd.read_excel('addbs.xlsx')
 
 ####################### new ########################
 @app.route('/')
