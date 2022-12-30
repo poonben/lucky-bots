@@ -13,9 +13,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,TemplateSendMessage,ImageSendMessage, StickerSendMessage, AudioSendMessage, FlexSendMessage
 )
 from linebot.models.template import *
-from linebot import (
-    LineBotApi, WebhookHandler
-)
+from linebot import (LineBotApi, WebhookHandler)
 
 app = Flask(__name__)
 
@@ -92,7 +90,7 @@ def event_handle(event):
     return ''
 
 
-dat = pd.read_excel('https://onedrive.live.com/view.aspx?resid=BC03A0034D5009C9!106&ithint=file%2cxlsx&authkey=!AE82tuPyb_rKM9M')
+dat = pd.read_excel('ben.xlsx')
 def getdata(query):
     res = dat[dat['QueryWord']==query]
     if len(res)==0:
