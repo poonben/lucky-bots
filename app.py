@@ -1,4 +1,4 @@
-111#!/usr/bin/python
+#!/usr/bin/python
 #-*-coding: utf-8 -*-
 ##from __future__ import absolute_import
 ###
@@ -6,6 +6,7 @@ from flask import Flask, jsonify, render_template, request
 import json
 import numpy as np
 import pandas as pd
+import xlsxwriter
 import requests
 import geopy.distance as ps
 from linebot.models import (
@@ -18,10 +19,10 @@ from linebot import (
 
 app = Flask(__name__)
 
-lineaccesstoken = 'BN50dGWrCel1vZK39kPDhBgqwvTTe/33aLRDmDxbRX5Fds5kP7aLifH5YLOUzFfuQ7SABUzH/J6G7ReeCFlgM0xQG388iOrY4e5WKZ6m2rMh+m6wVXHDqLktW8ElW0c4buliTDNNMXqhdVu8rOdjVwdB04t89/1O/w1cDnyilFU='
+lineaccesstoken = 'KkIIUDSiGrMEoeUi+iRiZNfY5Gce7zyINhGfZbR0ln+VcCZTDRg3E01IlU5QuERIQ7SABUzH/J6G7ReeCFlgM0xQG388iOrY4e5WKZ6m2rOR/6Twg8NeWPHAejcLnEbQnlG5uMeZC+9Vgx/ExbOp2QdB04t89/1O/w1cDnyilFU='
 line_bot_api = LineBotApi(lineaccesstoken)
 
-casedata = pd.read_excel('addbs.xlsx')
+casedata = pd.read_excel('ben.xlsx')
 
 ####################### new ########################
 @app.route('/')
@@ -55,6 +56,7 @@ def event_handle(event):
         print('error cannot get rtoken')
         return ''
     if 'message' in event.keys():
+       
         try:
             msgType = event["message"]["type"]
             msgId = event["message"]["id"]
@@ -69,8 +71,23 @@ def event_handle(event):
 
     if msgType == "text":
         msg = str(event["message"]["text"])
-        replyObj = handle_text(msg)
-        line_bot_api.reply_message(rtoken, replyObj)
+        if event.message.text == "x ":
+           msg = event.message.text
+           sep = msg.replace('x ','')
+           dataframe = pd.DataFrame({'Data' :[sep]})
+          # สร้าง Pandas Excel Writer เพื่อใช้เขียนไฟล์ Excel โดยใช้ Engine เป็น xlsxwriter
+          # โดยตั้งชื่อไฟล์ว่า 'simple_data.xlsx'
+           writer = pd.ExcelWriter('simple_data.xlsx', engine='xlsxwriter')
+          # นำข้อมูลที่สร้างไว้ในตัวแปร dataframe เขียนลงไฟล์
+           dataframe.to_excel(writer, sheet_name='หน้าที่1')
+           ben = "ok" 
+           line_bot_api.reply_message(rtoken, ben)
+          # จบการทำงาน Pandas Excel writer และเซฟข้อมูลออกมาเป็นไฟล์ Excel
+           writer.save()  
+                                        
+        else:
+           replyObj = handle_text(msg)         
+           line_bot_api.reply_message(rtoken, replyObj)
 
     if msgType == "postback":
         msg = str(event["postback"]["data"])
@@ -91,7 +108,7 @@ def event_handle(event):
     return ''
 
 
-dat = pd.read_excel('https://onedrive.live.com/view.aspx?resid=BC03A0034D5009C9!106&ithint=file%2cxlsx&authkey=!AE82tuPyb_rKM9M')
+dat = pd.read_excel('gig.xlsx')
 def getdata(query):
     res = dat[dat['QueryWord']==query]
     if len(res)==0:
@@ -99,72 +116,67 @@ def getdata(query):
     else:
         productName = res['ProductName'].values[0]
         imgUrl = res['ImgUrl'].values[0]
-        desc = res['Description'].values[0]
-        cont = res['Contact'].values[0]
-        return productName,imgUrl,desc,cont
+        #desc = res['Description'].values[0]
+        #cont = res['Contact'].values[0]
+        return productName,imgUrl #,desc,cont
 
 def flexmessage(query):
     res = getdata(query)
     if res == 'nodata':
         return 'nodata'
     else:
-        productName,imgUrl,desc,cont = res
+        productName,imgUrl = res #,desc,cont = res
     flex = '''
     {
-        "type": "bubble",
-        "hero": {
-          "type": "image",
-          "url": "%s",
-          "margin": "none",
-          "size": "full",
-          "aspectRatio": "1:1",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com"
-          }
-        },
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "spacing": "md",
-          "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com"
-          },
-          "contents": [
-            {
-              "type": "text",
-              "text": "%s",
-              "size": "xl",
-              "weight": "bold"
-            },
-            {
-              "type": "text",
-              "text": "%s",
-              "wrap": true
-            }
-          ]
-        },
-        "footer": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "button",
-              "action": {
-                "type": "postback",
-                "label": "ติดต่อคนขาย",
-                "data": "%s"
-              },
-              "color": "#F67878",
-              "style": "primary"
-            }
-          ]
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "%s",
+    "size": "full",
+    "aspectRatio": "20:17",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "https://liff.line.me/1656633739-NjWEVAWZ"
+    },
+    "animated": true
+  },
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "text": "%s",
+        "size": "xl",
+        "weight": "bold",
+        "color": "#cc4466",
+        "align": "center"
+      }
+    ],
+    "backgroundColor": "#000000"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "แชร์ คลิ๊ก",
+          "uri": "https://liff.line.me/1656633739-NjWEVAWZ"
         }
-      }'''%(imgUrl,productName,desc,cont)
+      }
+    ],
+    "flex": 0,
+    "backgroundColor": "#000000"
+  }
+}
+    '''%(imgUrl,productName)#,desc,cont)
     return flex
 
 from linebot.models import (TextSendMessage,FlexSendMessage)
